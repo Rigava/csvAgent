@@ -1,0 +1,8 @@
+plotly
+openpyxl
+duckdb
+pandas
+pandasai==1.4.10
+langchain_experimental
+tabulate
+langchain-google-genai
