@@ -13,11 +13,9 @@ st.title("CSV Agent Dashboard")
 st.markdown("_Prototype v0.1.0_")
 with st.sidebar:
     st.header("Configuration")
-    # uploaded_file = st.file_uploader("Choose a file",type="csv")
     # uploaded_file =r"C:\Users\arunj\Downloads\tradebook-ZM1064-EQ (1).csv"
     url = "https://raw.githubusercontent.com/Rigava/DataRepo/main/yesbank.csv"
     uploaded_file = requests.get(url).content
-
 # df=pd.read_csv(uploaded_file)
 df = pd.read_csv(io.StringIO(uploaded_file.decode('utf-8'))) 
 st.write(df)
