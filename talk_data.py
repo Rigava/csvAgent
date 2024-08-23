@@ -19,7 +19,7 @@ convert_system_message_to_human=True
 )
 
 st.set_page_config(page_title="👨‍💻 Talk with your Data")
-st.title("👨‍💻 Talk with your CSV")
+st.title("👨‍💻 Talk with your Data")
 st.write("Please upload your CSV file below.")
 
 def csv_tool(filename :  str):
