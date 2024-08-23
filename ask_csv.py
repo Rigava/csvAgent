@@ -12,7 +12,10 @@ key = "AIzaSyAKEaaM7fWIErN3VbikjP_T5m0UfhBy5iE"
 st.title("CSV Agent Dashboard")
 st.markdown("_Prototype v0.1.0_")
 with st.sidebar:
-    st.header("Configuration")
+    st.header("Disclaimer")
+    st.warning(
+        "This app uses LangChain's `PythonAstREPLTool` which is vulnerable to arbitrary code execution. Please use caution in deploying and sharing this app."
+    )
     # uploaded_file =r"C:\Users\arunj\Downloads\tradebook-ZM1064-EQ (1).csv"
     url = "https://raw.githubusercontent.com/Rigava/DataRepo/main/yesbank.csv"
     uploaded_file = requests.get(url).content
