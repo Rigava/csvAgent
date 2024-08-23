@@ -35,7 +35,7 @@ if uploaded_file is not None:
         with st.spinner(text="In progress..."):
             st_callback = StreamlitCallbackHandler(st.container())
             st.success(agent.run(user_question,callbacks=[st_callback]))                   
-            st.set_option('deprecation.showPyplotGlobalUse', False)
-            st.pyplot()
+            # st.set_option('deprecation.showPyplotGlobalUse', False)
+            # st.pyplot()
  
 
