@@ -8,7 +8,7 @@ from langchain_community.callbacks.streamlit import (
 )
 from langchain_google_genai import ChatGoogleGenerativeAI 
 st.set_page_config(page_title="Langchain Dashboard", page_icon=":bar_chart:", layout="wide")
-key = "AIzaSyAKEaaM7fWIErN3VbikjP_T5m0UfhBy5iE"
+key = st.secrets.API_KEY
 st.title("CSV Agent Dashboard")
 st.markdown("_Prototype v0.1.0_")
 with st.sidebar:
