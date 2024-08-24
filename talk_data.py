@@ -9,7 +9,7 @@ from langchain_community.callbacks.streamlit import (
     StreamlitCallbackHandler,
 )
 from langchain_google_genai import ChatGoogleGenerativeAI 
-key = "AIzaSyAKEaaM7fWIErN3VbikjP_T5m0UfhBy5iE"
+key = st.secrets.API_KEY
 
 llm = ChatGoogleGenerativeAI(
 model="gemini-pro",
