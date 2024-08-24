@@ -56,7 +56,11 @@ data = st.file_uploader(
 
 if data is None:
     st.info(" Upload a file through config", icon="ℹ️")
+    st.warning(
+        "This app uses LangChain's `PythonAstREPLTool` which is vulnerable to arbitrary code execution. Please use caution in deploying and sharing this app."
+    )
     st.stop()
+    
 df = load_data(data)    
 with st.expander("🔍 Data Preview"):
     st.dataframe(df)
