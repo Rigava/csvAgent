@@ -18,7 +18,7 @@ google_api_key=key,
 convert_system_message_to_human=True
 )
 
-st.set_page_config(page_title="👨‍💻 Talk with your Data",layout="wide")
+st.set_page_config(page_title="👨‍💻 Josh@i Excel tool",layout="wide")
 st.title("👨‍💻 Talk with your Data")
 st.write("Please upload your CSV/XLS file below.")
 
