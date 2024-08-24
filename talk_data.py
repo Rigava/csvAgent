@@ -2,14 +2,14 @@
 import os
 import streamlit as st
 import pandas as pd
-from csv_functions import ask_agent,decode_response,write_answer
+from csv_functions import ask_agent,decode_response,write_answer,clear_submit
 import json
 from langchain_experimental.agents import create_pandas_dataframe_agent
 from langchain_community.callbacks.streamlit import (
     StreamlitCallbackHandler,
 )
 from langchain_google_genai import ChatGoogleGenerativeAI 
-key = st.secrets.API_KEY
+key = "AIzaSyAKEaaM7fWIErN3VbikjP_T5m0UfhBy5iE"
 
 llm = ChatGoogleGenerativeAI(
 model="gemini-pro",
@@ -20,20 +20,44 @@ convert_system_message_to_human=True
 
 st.set_page_config(page_title="👨‍💻 Talk with your Data")
 st.title("👨‍💻 Talk with your Data")
-st.write("Please upload your CSV file below.")
+st.write("Please upload your CSV/XLS file below.")
 
-def csv_tool(filename :  str):
+file_formats = {
+    "csv": pd.read_csv,
+    "xls": pd.read_excel,
+    "xlsx": pd.read_excel,
+    "xlsm": pd.read_excel,
+    "xlsb": pd.read_excel,
+}
+@st.cache_data(ttl="2h")
+def load_data(uploaded_file):
+    try:
+        ext = os.path.splitext(uploaded_file.name)[1][1:].lower()
+    except:
+        ext = uploaded_file.split(".")[-1]
+    if ext in file_formats:
+        return file_formats[ext](uploaded_file)
+    else:
+        st.error(f"Unsupported file format: {ext}")
+        return None    
 
-    df = pd.read_csv(filename)    
+# def csv_tool(filename :  str):
 
-    return df
+#     df = pd.read_csv(filename)    
 
-data = st.file_uploader("Upload a CSV" , type="csv")
+#     return df
+
+data = st.file_uploader(
+    "Upload a Data file",
+    type=list(file_formats.keys()),
+    help="Various File formats are Support",
+    on_change=clear_submit,
+)
 
 if data is None:
     st.info(" Upload a file through config", icon="ℹ️")
     st.stop()
-df = csv_tool(data)    
+df = load_data(data)    
 with st.expander("🔍 Data Preview"):
     st.dataframe(df)
 query = st.text_area("Send a Message")
@@ -41,7 +65,7 @@ if st.button("Submit Query", type="primary"):
     # Create an agent from the CSV file. 
     st_cb = StreamlitCallbackHandler(st.container(), expand_new_thoughts=False)
 
-    agent = create_pandas_dataframe_agent(llm, df, verbose=True,allow_dangerous_code=True)
+    agent = create_pandas_dataframe_agent(llm, df, verbose=True,handle_parsing_errors=True,allow_dangerous_code=True)
     # Query the agent.
     response = ask_agent(agent=agent, query=query)
 
