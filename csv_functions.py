@@ -5,6 +5,15 @@ from langchain_community.callbacks.streamlit import (
     StreamlitCallbackHandler,
 )
 
+def clear_submit():
+    """
+    Clear the Submit Button State
+    Returns:
+
+    """
+    st.session_state["submit"] = False
+
+
 def ask_agent(agent, query):
     """
     Query an agent and return the response as a string.
