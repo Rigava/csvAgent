@@ -2,3 +2,4 @@ pandas
 langchain_experimental
 langchain-google-genai
 tabulate
+openpyxl
